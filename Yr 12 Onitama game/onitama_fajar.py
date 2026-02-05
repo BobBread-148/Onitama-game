@@ -119,8 +119,15 @@ class Piece():
         self.colour = colour
         self.master = master
         self.row = row
-        self.column = column
+        self.col = column
         self.surface = img
+        
+    def new_row (self, new_row):
+        self.row = new_row
+        
+    def new_col (self, new_col):
+        self.col = new_col
+        
 
 class Card():
     def __init__(self, name, moves):
@@ -133,7 +140,7 @@ class Card():
         possible_positions = []   
         flip = 1 if player_colour == "blue" else -1
         for row, col in self.moves:
-            new_row, new_col = piece.row + row*flip, piece.column + col*flip
+            new_row, new_col = piece.row + row*flip, piece.col + col*flip
             if 0<= new_row < 5 and 0 <= new_col < 5:
                 check = current_board[new_row][new_col]
                 if check is None or check.colour != player_colour:
@@ -262,6 +269,19 @@ while running:
                 
                 if selected_card and selected_piece:
                     highlighted_squares = selected_card.move_options(selected_piece, current_player, board)
+                
+                if grid_pos:
+                    grid_row, grid_col = grid_pos   
+                    if (grid_row, grid_col) in highlighted_squares and selected_piece:
+                        board[selected_piece.row][selected_piece.col] = None
+                        selected_piece.new_row(grid_row)
+                        selected_piece.new_col(grid_col)
+                        board[selected_piece.row][selected_piece.col] = selected_piece
+                        selected_piece = None
+                        highlighted_squares = []
+                    
+                    
+                    
 
     pygame.display.flip()
 pygame.quit()
