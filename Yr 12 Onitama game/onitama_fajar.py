@@ -14,6 +14,7 @@ game_state = HOME
 
 #VARIABLES ANDF STUFF---------------------------------------------------
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+IMAGE_FOLDER = os.path.join(THIS_FOLDER, "images")
 rules_slide = 0
 current_player = "blue"
 selected_card = None
@@ -61,7 +62,7 @@ CARDS = {
 }
 
 #FUNCTIONS------------------------------------------------------------------------------
-def load_image(img_name, folder=THIS_FOLDER, **kwargs):
+def load_image(img_name, folder=IMAGE_FOLDER, **kwargs):
     image_path = os.path.join(folder, img_name)
     image = pygame.image.load(image_path).convert_alpha()
     rect = image.get_rect(**kwargs)
@@ -214,57 +215,6 @@ blue_wins, winner_rect = load_image("blue_wins.png", center=(width//2, height//2
 #GAME LOOP--------------------------------------------------------------------------------
 running = True
 while running:
-    
-    if game_state == HOME:
-        screen.blit(home_screen, home_rect)
-        screen.blit(play_button, play_btn_homerect)
-        screen.blit(rules_button, rules_btn_rect)
-
-    elif game_state == RULES:
-        screen.blit(rules_slides[rules_slide], (0,0))
-        if rules_slide < 2:
-            screen.blit(next_arrow, next_arrow_rect)
-        if rules_slide <= 2:
-            screen.blit(back_arrow, back_arrow_rect) 
-        if rules_slide == 2:
-            screen.blit(play_button, play_btn_rulesrect)
-
-    elif game_state == PLAYING:
-        screen.blit(game_screen, playing_rect)
-        for row, col in highlighted_squares:
-            x, y = grid_to_pixel(row, col)
-            pygame.draw.rect(screen, (255,255,0), (x, y, 116, 116), 4)
-        
-        for row in range(5): 
-            for col in range(5):
-                piece = board[row][col]   
-                if piece:
-                    piece_x, piece_y = grid_to_pixel(row, col)
-                    piece_rect = piece.surface.get_rect(center=(piece_x + 58, piece_y + 58))
-                    screen.blit(piece.surface, piece_rect)
-                    if piece == selected_piece:
-                        pygame.draw.rect(screen, (255, 255, 255), (piece_x, piece_y, 116, 116), 2)
-    
-        for card in blue_hand:
-            screen.blit(card.surface, card.rect)
-            if card == selected_card:
-                pygame.draw.rect(screen, (0, 255, 0), card.rect, 3)
-        
-        for card in red_hand:
-            screen.blit(card.surface, card.rect)
-            if card == selected_card:
-                pygame.draw.rect(screen, (0, 255, 0), card.rect, 3)
-
-        if side_pile:
-            screen.blit(side_pile.surface, side_pile.rect)
-    
-    elif game_state == GAME_OVER:
-        if winner == "red":
-            screen.blit(red_wins, winner_rect)
-        elif winner == "blue":
-            screen.blit(blue_wins, winner_rect)
-                                      
-                        
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -332,9 +282,60 @@ while running:
                         highlighted_squares = []
                         valid_moves = []
                         switch_turn()
-                    
+        
+    if game_state == HOME:
+        screen.blit(home_screen, home_rect)
+        screen.blit(play_button, play_btn_homerect)
+        screen.blit(rules_button, rules_btn_rect)
+
+    elif game_state == RULES:
+        screen.blit(rules_slides[rules_slide], (0,0))
+        if rules_slide < 2:
+            screen.blit(next_arrow, next_arrow_rect)
+        if rules_slide <= 2:
+            screen.blit(back_arrow, back_arrow_rect) 
+        if rules_slide == 2:
+            screen.blit(play_button, play_btn_rulesrect)
+
+    elif game_state == PLAYING:
+        screen.blit(game_screen, playing_rect)
+        for row, col in highlighted_squares:
+            x, y = grid_to_pixel(row, col)
+            pygame.draw.rect(screen, (255,255,0), (x, y, 116, 116), 4)
+        
+        for row in range(5): 
+            for col in range(5):
+                piece = board[row][col]   
+                if piece:
+                    piece_x, piece_y = grid_to_pixel(row, col)
+                    piece_rect = piece.surface.get_rect(center=(piece_x + 58, piece_y + 58))
+                    screen.blit(piece.surface, piece_rect)
+                    if piece == selected_piece:
+                        pygame.draw.rect(screen, (255, 255, 255), (piece_x, piece_y, 116, 116), 2)
+    
+        for card in blue_hand:
+            screen.blit(card.surface, card.rect)
+            if card == selected_card:
+                pygame.draw.rect(screen, (0, 255, 0), card.rect, 3)
+        
+        for card in red_hand:
+            screen.blit(card.surface, card.rect)
+            if card == selected_card:
+                pygame.draw.rect(screen, (0, 255, 0), card.rect, 3)
+
+        if side_pile:
+            screen.blit(side_pile.surface, side_pile.rect)
+    
+    elif game_state == GAME_OVER:
+        if winner == "red":
+            screen.blit(red_wins, winner_rect)
+        elif winner == "blue":
+            screen.blit(blue_wins, winner_rect)
+                                        
     if winner:                  
-        game_state = GAME_OVER  
+        game_state = GAME_OVER                 
+
+                 
 
     pygame.display.flip()
 pygame.quit()
