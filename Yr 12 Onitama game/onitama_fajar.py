@@ -9,6 +9,7 @@ pygame.init()
 HOME = "home"
 RULES = "rules"
 PLAYING = "playing"
+GAME_OVER = "game over"
 game_state = HOME
 
 #VARIABLES ANDF STUFF---------------------------------------------------
@@ -25,6 +26,9 @@ card_positions = [(718,85), (955,85), (718,454), (955,454), (1040,270)]
 red_hand = []
 blue_hand = []
 side_pile = []
+winner = None
+FONT = pygame.font.SysFont(None, 32)
+BLACK = (0, 0, 0)
 
 
 board = [
@@ -44,16 +48,16 @@ CARDS = {
     "Rabbit": [(0, 2), (1, 1), (-1, -1)],
     "Crab": [(2, 0), (0, -2), (0, 2)],
     "Elephant": [(0, -1), (0, 1), (1, 1), (1, -1)],
-    "Goose": [(0, -1), (1, -1), (0, 1), (-1, 1)],
-    "Rooster": [(0, 1), (1, 1), (0, -1), (-1, -1)],
+    "Rooster": [(0, -1), (1, -1), (0, 1), (-1, 1)],
+    "Goose": [(0, 1), (1, 1), (0, -1), (-1, -1)],
     "Monkey": [(-1, -1), (1, -1), (-1, 1), (1, 1)],
     "Mantis": [(1, -1), (-1, 0), (1, 1)],
     "Horse" : [(1, 0), (0, -1), (-1, 0)],
     "OX" : [(0, 1), (1, 0), (-1, 0)],
     "Crane" : [(1, 0), (-1, -1), (-1, 1)],
     "Boar" : [(0, -1), (0, 1), (1, 0)],
-    "Eel" : [(0, 1), (1, -1), (-1, -1)],
-    "Cobra" : [(0, -1), (1, 1), (-1, 1)]
+    "Cobra" : [(0, 1), (1, -1), (-1, -1)],
+    "Eel" : [(0, -1), (1, 1), (-1, 1)]
 }
 
 #FUNCTIONS------------------------------------------------------------------------------
@@ -106,6 +110,31 @@ def start_new_game():
     current_player = "blue"
     selected_piece = selected_card = None
     highlighted_squares = []
+
+def switch_turn():
+    global current_player, blue_hand, red_hand, side_pile, selected_card
+
+    # swap selected card with side pile
+    if current_player == "blue":
+        blue_hand.remove(selected_card)
+        blue_hand.append(side_pile)
+        side_pile = selected_card
+        current_player = "red"
+    else:
+        red_hand.remove(selected_card)
+        red_hand.append(side_pile)
+        side_pile = selected_card
+        current_player = "blue"
+
+    selected_card = None
+
+    for i, card in enumerate(blue_hand):
+        card.rect.topleft = card_positions[i]
+
+    for i, card in enumerate(red_hand):
+        card.rect.topleft = card_positions[i + 2]
+
+    side_pile.rect.topleft = card_positions[4]
 
 
 #CLASSES------------------------------------------------------------------------------
@@ -178,6 +207,8 @@ red_piece, _ = load_image("red_piece.png")
 blue_piece, _ = load_image("blue_piece.png")
 red_master, _ = load_image("red_masterpiece.png")
 blue_master, _ = load_image("blue_masterpiece.png")
+red_wins, winner_rect = load_image("red_wins.png", center=(width//2, height//2))
+blue_wins, winner_rect = load_image("blue_wins.png", center=(width//2, height//2))
 
         
 #GAME LOOP--------------------------------------------------------------------------------
@@ -223,9 +254,15 @@ while running:
             screen.blit(card.surface, card.rect)
             if card == selected_card:
                 pygame.draw.rect(screen, (0, 255, 0), card.rect, 3)
-        
+
         if side_pile:
             screen.blit(side_pile.surface, side_pile.rect)
+    
+    elif game_state == GAME_OVER:
+        if winner == "red":
+            screen.blit(red_wins, winner_rect)
+        elif winner == "blue":
+            screen.blit(blue_wins, winner_rect)
                                       
                         
     for event in pygame.event.get():
@@ -273,15 +310,31 @@ while running:
                 if grid_pos:
                     grid_row, grid_col = grid_pos   
                     if (grid_row, grid_col) in highlighted_squares and selected_piece:
+                        
+                        #capture win
+                        target = board[grid_row][grid_col]
+                        if target and target.master:
+                            winner = current_player 
+                            
                         board[selected_piece.row][selected_piece.col] = None
                         selected_piece.new_row(grid_row)
                         selected_piece.new_col(grid_col)
                         board[selected_piece.row][selected_piece.col] = selected_piece
+                        
+                        #temple win
+                        if selected_piece.master:
+                            if selected_piece.colour == "blue" and (grid_row, grid_col) == (4, 2):
+                                winner = "blue"
+                            if selected_piece.colour == "red" and (grid_row, grid_col) == (0, 2):
+                                winner = "red"
+                        
                         selected_piece = None
                         highlighted_squares = []
+                        valid_moves = []
+                        switch_turn()
                     
-                    
-                    
+    if winner:                  
+        game_state = GAME_OVER  
 
     pygame.display.flip()
 pygame.quit()
