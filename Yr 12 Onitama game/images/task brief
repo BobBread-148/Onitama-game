@@ -1,0 +1,306 @@
+ATAR Year 12 Computer Science – Project Task (Onitama 2D Game)
+Course: Computer Science – ATAR Year 12
+
+Task: Task 2 – Unit 3
+
+Assessment type: Project
+
+Conditions:
+
+Part 1: 2 weeks for the completion of the investigation and design of the project
+Part 2: School holidays + 1 week for the development, testing and evaluation of the project
+Task weighting: 15% of the school mark for this pair of units
+
+Introduction
+Use the software development framework to design and create an interactive two-dimensional board game adaptation of Onitama using Python and Pygame.
+
+Onitama is a two-player abstract strategy game played on a 5 × 5 grid. Each player controls five pawns — one designated as the “Master” and four “Students” — and movement is determined by a deck of double-sided cards showing different movement patterns. The goal of the game is to either capture your opponent’s Master pawn or move your own Master pawn to the opponent’s starting space. At the beginning of the game players place their Master pawn in the centre square of their side of the board and their four Student pawns on the adjacent squares in front. On each turn a player chooses one of their two movement cards, reveals it and moves one of their pawns according to the pattern on that card. Pawns cannot move through other pieces, move off the board, or occupy a space already containing one of their own pieces. When a pawn ends its move on a square occupied by an opponent’s pawn, the opponent’s pawn is captured and removed from the board. The game ends immediately when a player captures the opponent’s Master pawn or when their Master reaches the opponent’s starting square.
+
+Click here to see how the game works
+You will design and implement a digital version of this game. Your program must utilise object-oriented principles (classes for the board, pieces, cards and game engine) and make use of a 2D array to represent the game grid. Pygame will be used to render the board and pieces and to process user input. As you plan and develop your project you should consider how you will implement core game mechanics such as card management, piece selection and movement, turn sequencing, capturing and win detection.
+
+The project must demonstrate your understanding of software development, including planning and design, modular code development, testing and evaluation. This project builds on the skills developed in Year 11 but requires greater complexity and sophistication: your code must use multiple classes, make effective use of a two-dimensional array, and provide a graphical interface with appropriate user feedback. If you are unsure whether your game design meets the requirements, consult your teacher.
+
+Task Requirements
+Part 1 – Investigate and Design
+Investigate
+Problem outline
+Write a brief outline of the purpose of your game and its overall objective. For example: “create a digital version of the board game Onitama where two players can compete on a computer screen using Pygame”.
+Problem description
+Write a detailed description of the game that includes:
+The objective of the game (capture the opponent’s Master or reach their starting square)
+The 5 × 5 board and initial setup (location of Master and Students)
+The deck of movement cards and how players choose and use cards
+Rules for moving, including restrictions on moving through pieces, moving off the board or onto your own pieces
+Capturing rules and how captures are resolved
+How the digital version will be played from the user’s point of view (e.g. selecting a piece by clicking it, selecting a card, highlighting valid moves, then clicking a destination square)
+How winning conditions are detected and displayed to the user
+Any extended or optional features you intend to include (e.g. timers, AI opponent, undo button, sound effects)
+Requirements
+Write a detailed list of requirements for your Onitama game based on the problem description you have written. Suitably classify these requirements, for example:
+Functional requirements – what the program must do (e.g. initialise the board, allow piece selection and movement based on cards, swap used cards with the side card, detect captures and win conditions, validate moves, update the display after each move, etc.).
+Non‑functional requirements – aspects such as usability, clarity of graphics, responsiveness of the interface, readability and maintainability of code (good naming conventions, use of classes and modules, commenting), performance (game runs smoothly at reasonable frame rate), and use of object‑oriented principles.
+Development schedule (Gantt chart)
+Break down the steps required to produce your software project and develop a timeline for when each of these steps needs to be completed.
+This must be presented as a Gantt chart showing:
+Main phases (Investigate, Design, Develop, Test, Evaluate)
+Key tasks within each phase (e.g. research game rules, design data structures, implement game loop, test capturing, evaluate usability)
+Start and finish dates for each task
+Milestones (e.g. “Core classes designed”, “Basic board drawing complete”, “First playable prototype”)
+Design
+Use structured algorithms to design the logic of your Onitama game. Your design must include the following artefacts:
+
+Structure chart or class diagram
+Draw a diagram showing the modular and object‑oriented breakdown of your program. At a minimum, include:
+Key classes such as Game (manages overall state and turns), Board (contains a 2D array storing piece references), Piece (stores type and position), and Card (stores name and movement pattern).
+Methods for each class (e.g. draw(), get_valid_moves(), handle_click()) and how they interact.
+Hierarchy and relationships (e.g. the Game object contains a Board and a list of Cards; the Board manages a 2D array of Pieces).
+Flowchart(s)
+Create at least one flowchart for a core part of the game logic. Examples include:
+The main game loop (start → draw board and cards → get user input → validate move → update game state → swap cards → check win → switch player → repeat).
+The move‑validation routine (determine valid moves based on selected card and current piece position → ensure moves stay within bounds and do not land on your own piece → return list of valid squares).
+Pseudocode algorithm
+Using pseudocode, write an algorithm showing the core logic of the game to show how the game works. This should demonstrate:
+Use of sequence, selection and iteration.
+Use of a two‑dimensional array (5 × 5) to store the board state.
+Calls to key methods of your classes.
+Swapping the used card with the side card at the end of each turn.
+Trace tables and algorithm testing
+Test your algorithms using trace tables and appropriate test data:
+Use at least one trace table to desk‑check a complete play‑through from start to one of the victory conditions.
+Show how key variables and array contents change as the algorithm executes (e.g. piece positions, current player, cards held).
+Part 2 – Develop, Test and Evaluate
+Develop
+Python program (modular Onitama game using Pygame)
+Using a modular, object‑oriented approach, create your program using Python and Pygame. Ensure you use good programming practices as indicated in the syllabus. Your program must:
+Use sequence, selection and iteration appropriately.
+Use a two‑dimensional array to represent the 5 × 5 board and store references to piece objects.
+Use classes and objects to encapsulate game components (board, pieces, cards, game controller).
+Implement the game rules accurately: card drawing and selection, movement restrictions, capturing, card swapping, win conditions.
+Draw the board and pieces using Pygame, with clear visual cues (e.g. colours for players, markers for master pieces, highlighting of valid moves).
+Respond to mouse events for selecting pieces, selecting cards and moving pieces.
+Provide user feedback (e.g. whose turn it is, instructions, win messages).
+Use meaningful variable and function names, constants where appropriate and appropriate indentation.
+Include comments that explain the purpose of code segments and methods.
+Validate input and handle unexpected interactions gracefully.
+Test plan
+Develop a test plan for your program to ensure that it is fully tested and documented. Your test plan should:
+Include appropriate test data (normal moves, boundary cases such as moves at the edge of the board, invalid moves, capturing moves and winning moves).
+Include tests that cover all major gameplay scenarios: card swapping, capturing the master, winning by reaching the opponent’s starting square, illegal moves (off‑board, onto own piece).
+Include type and range checks where applicable (e.g. ensuring mouse coordinates are within the board area).
+Be documented in a table outlining: test case ID, input (description of move or action), expected output/behaviour, actual output/behaviour, pass/fail and notes.
+Evaluate
+User acceptance testing (UAT)
+Reflect on the success of your system and how well it meets the system requirements. To perform your UAT, you should:
+Consider how well your program meets the requirements you developed in Part 1 (functional and non‑functional).
+Discuss the quality of the user experience (clarity of graphics, ease of selecting pieces, response time, overall enjoyment of the game). Gather feedback from at least one peer.
+Document any known bugs and limitations (e.g. missing features, unhandled edge cases) and explain how they impact the system.
+Explain any changes you made to your original design (class diagram, flowcharts, pseudocode) and justify these changes.
+Developer retrospective
+Reflect on the process you followed to develop your system and how you could improve this process. Some aspects you should consider include:
+What worked well?
+What didn’t work well?
+What would you do differently next time (planning, design, coding, testing, project management)?
+Sources and ethical considerations
+Document the sources you used to get information about how to develop your system, including websites, textbooks, tutorials and any open‑source code. Briefly comment on:
+How you avoided plagiarism by acknowledging any code you adapted or reused.
+Any open‑source or licensing considerations relevant to assets or code you incorporated (e.g. fonts, sound files, graphics).
+Submission Requirements
+Part 1 – Investigation and Design
+For Part 1, you are to produce a single, well‑formatted PDF document. This document should include:
+
+A cover page
+Suitable headings to make each section clear
+Headers and footers
+Appropriate terminology, explanations and written expression
+Diagrams created using appropriate software, including:
+Gantt chart
+Structure chart/class diagram
+Flowchart(s)
+Pseudocode and trace tables
+This file should be named YourSurname_OnitamaPart1.
+
+Part 2 – Development, Testing and Evaluation
+For Part 2, you are to produce:
+
+A single, well‑formatted PDF document that includes:
+Any updates to your design (class diagram, flowcharts, pseudocode)
+Your final test plan and documented results
+User acceptance testing and evaluation
+Developer retrospective
+Documented sources and ethical considerations
+This document should be named YourSurname_OnitamaPart2Documentation and should include:
+A cover page
+Suitable headings to make each section clear
+Headers and footers
+Appropriate terminology, explanations and written expression
+Diagrams created using appropriate software (if appropriate)
+A single folder that includes your entire Python/Pygame project, including any additional files that are required to run your program (images, sound files, etc.). This folder should be compressed to a zip file and named YourSurname_OnitamaProgram.
+Marking Criteria
+Part 1 (40% of the total assessment task)
+Marking key for Onitama game project – Part 1
+
+Description	Marks
+Development Schedule (Gantt chart)
+Breaks down the project planning into a series of meaningful steps and presents a clear Gantt chart with a realistic timeline for completing each step.	2
+Breaks down the project into a limited series of steps with some attempt at showing a timeline, but Gantt chart may be incomplete or unclear.	1
+Subtotal /2
+
+Description	Marks
+Problem Outline
+Accurately outlines the purpose of the game.	1
+Subtotal /1
+
+Description	Marks
+Problem Description
+Provides a clear and detailed explanation of the game, its rules, objectives and how it is played, with reference to movement cards, capturing rules and winning conditions.	5
+Clearly explains the game, its rules and objectives and how it is played, with reference to most of the key rules.	4
+Describes the game, its rules and objectives and how it is played, with reference to some key rules.	3
+Gives a limited description of the game with some reference to game play.	2
+Gives a limited description of the game that is unclear and/or incomplete.	1
+Subtotal /5
+
+Description	Marks
+Requirements
+Provides a clear and detailed list of functional and non‑functional requirements that fully meet the needs of the problem description. Suitably classifies requirements.	4
+Completes a list of requirements that meet the needs of the problem description. Classifies requirements.	3
+Provides a list of requirements that mostly meet the needs of the problem description. Partially classifies requirements.	2
+Provides an incomplete list of requirements that meet some of the needs of the problem description. Makes a limited attempt at classifying requirements.	1
+Subtotal /4
+
+Description	Marks
+Algorithms and Design
+Provides a completed algorithm in pseudocode that gives a reasonable representation of the core game logic, supported by appropriate design diagrams (class/structure chart and flowchart), using correct symbols and/or syntax.	5
+Provides a completed algorithm in pseudocode that represents the core game logic, with generally correct symbols and/or syntax, and includes mostly appropriate design diagrams.	4
+Provides a mostly complete algorithm in pseudocode that gives a partial representation of the core game logic, with symbols and/or syntax that are mostly correct. Design diagrams may be incomplete.	3
+Provides an algorithm with a partial solution to playing the game, with some errors in syntax, logic and/or symbols being used. Design diagrams may contain significant errors.	2
+Provides a partially correct algorithm and/or uses incorrect symbols/syntax. Design diagrams are missing or largely incorrect.	1
+Subtotal /5
+
+Description	Marks
+Develops an accurate algorithm that contains no logic errors, and demonstrates the use of a range of control structures (sequence, selection, iteration) and appropriately uses a two‑dimensional array.	3
+Develops an accurate algorithm that may contain minor logic errors, and uses a range of control structures and a two‑dimensional array.	2
+Develops an algorithm that contains logic errors, and uses a minimal range of control structures and/or misuses arrays.	1
+Subtotal /3
+
+Description	Marks
+Trace Tables
+Completes comprehensive algorithm logic testing using appropriate test data in the trace table provided.	3
+Partially tests algorithm using the trace table with appropriate test data.	2
+Partially tests algorithm with a trace table, using incorrect format and/or incomplete test data.	1
+Subtotal /3
+
+Total Part 1 /23
+
+Part 2 (60% of the total assessment task)
+Marking key for Onitama game project – Part 2
+
+Description	Marks
+Use of programming structures
+Makes consistent and appropriate use of a variety of control structures. Uses data types appropriately, including effective use of a two‑dimensional array and classes with objects, constants, variables, selection and iteration.	5
+Makes appropriate use of a variety of control structures, including selection and iteration. Mostly uses data types appropriately with constants, variables and objects.	4
+Makes use of a variety of control structures, although may not use the most appropriate structures at times. Attempts to make appropriate use of a variety of data types for variables, including some use of arrays and objects.	3
+Attempts to use a variety of control structures such as selection and/or iteration. Makes limited use of data types with variables and some attempt at using arrays appropriately.	2
+Makes minimal use of selection and iteration in code, with inappropriate use of different data types. Provides arrays or classes that are not used, or are used inappropriately.	1
+Subtotal /5
+
+Description	Marks
+Good programming practice
+Appropriately structures code, making effective use of modularisation, classes and parameter passing with appropriate naming conventions and use of white space.	5
+Mostly structures code appropriately, making use of modularisation, classes and parameter passing with appropriate naming conventions and white space.	4
+Creates simplistic code using modularisation with some use of classes and parameter passing. Mostly uses appropriate naming conventions with some use of white space.	3
+Attempts to modularise code with limited consideration of classes and parameters. Uses some naming conventions, although these may be inconsistent.	2
+Produces poorly structured code that makes minimal or no use of modularisation or classes. Naming conventions throughout the code are inconsistent and/or not meaningful.	1
+Subtotal /5
+
+Description	Marks
+Uses accurate and useful comments throughout the code to explain the purpose of classes, methods and key sections where necessary.	3
+Uses comments that help make code readable.	2
+Makes limited use of comments throughout code.	1
+Subtotal /3
+
+Description	Marks
+Functionality and game implementation
+Develops an effective and efficient program that implements all required game features (movement, capturing, card swapping, win detection, graphic representation) with minimal bugs.	4
+Develops an effective program that implements most game features, but may contain some bugs or missing minor features.	3
+Develops a program with a significant number of bugs or missing features.	2
+Partially completes the program implementing minimal system requirements.	1
+Subtotal /4
+
+Description	Marks
+Test Plan
+Completes a detailed test plan and documents testing of the program. Considers all possible inputs and game scenarios, including different card combinations, capturing scenarios and winning scenarios.	5
+Completes a test plan and documents testing of the program. Considers possible inputs and game scenarios.	4
+Completes a test plan and documents testing of the program. Considers some possible inputs and game scenarios.	3
+Completes and documents a partial test plan. Considers limited inputs and game scenarios.	2
+Develops a minimal test plan and/or provides minimal documentation of program testing.	1
+Subtotal /5
+
+Description	Marks
+User Acceptance Testing
+Demonstrates a detailed evaluation of how the program meets the requirements identified in Part 1, including discussion of the user experience.	5
+Evaluates how the program meets the system requirements, with discussion of the user experience.	4
+Completes a partial evaluation of how the program meets the requirements, with a superficial discussion of the user experience.	3
+Completes a limited evaluation of how the program meets the system requirements.	2
+Completes a superficial evaluation of the program and how it meets the system requirements.	1
+Subtotal /5
+
+Description	Marks
+Provides a detailed discussion of how the final product could be improved and documents any bugs and/or limitations.	4
+Describes bugs and/or limitations with reference to how the final product could be improved.	3
+Identifies bugs and/or limitations, without reference to their impact on the final product.	2
+Attempts to identify bugs and/or limitations, with no or limited discussion.	1
+Subtotal /4
+
+Description	Marks
+Retrospective
+Completes a detailed evaluation of the development process and suggests future impacts.	3
+Completes an evaluation of the development process that was used, including some suggested future impacts.	2
+Completes a minimal evaluation of the development process with superficial comments on the development process used and suggested future impacts.	1
+Subtotal /3
+
+Total Part 2 /34
+
+Overall Total /57
+
+
+
+Submission Checklist
+Use this checklist to track everything you must submit.
+
+Part 1 – Investigation & Design (PDF)
+ Problem outline [1]
+ Problem description [4]
+ Requirements (functional & non-functional) [4]
+ Development schedule (Gantt chart) [2]
+ Structure chart [3]
+ Flowchart(s) [5]
+ Pseudocode [5]
+ Trace tables [3]
+Part 2 – Development & Evaluation
+ Python program (zip) [14]
+ Test plan & results [5]
+ User acceptance testing [5]
+ Developer retrospective [3]
+ Sources & ethics [3]
+Tick items as you complete them
+📄 Marks shown are maximum marksSubmission Checklist
+Use this checklist to track everything you must submit.
+
+Part 1 – Investigation & Design (PDF)
+ Problem outline [1]
+ Problem description [4]
+ Requirements (functional & non-functional) [4]
+ Development schedule (Gantt chart) [2]
+ Structure chart [3]
+ Flowchart(s) [5]
+ Pseudocode [5]
+ Trace tables [3]
+Part 2 – Development & Evaluation
+ Python program (zip) [14]
+ Test plan & results [5]
+ User acceptance testing [5]
+ Developer retrospective [3]
+ Sources & ethics [3]
+Tick items as you complete them
+📄 Marks shown are maximum marks
